@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class='m-2'>
+    <input type="text " placeholder="enter your message here" class="border border-black">
+    <button class="bg-blue-500 text-white px-2 rounded-md ">
+        send
+    </button>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        const socket = io();
+        var input = document.querySelector('input');
+        var button = document.querySelector('button');
+        button.addEventListener("click", function () {
+            var msg = input.value;
+            socket.emit('msgg', msg);
+        });
+
+        socket.on("msgg", function (msg) {
+            console.log(msg);
+        }); 
+    </script>
+</body>
+
+</html>
